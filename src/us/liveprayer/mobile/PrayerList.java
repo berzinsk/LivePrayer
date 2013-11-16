@@ -1,15 +1,51 @@
 package us.liveprayer.mobile;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.handmark.pulltorefresh.library.PullToRefreshAdapterViewBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+
+import us.liveprayer.mobile.adapters.PrayerListAdapter;
+import us.liveprayer.mobile.asynctasks.GetPrayerList;
+import us.liveprayer.mobile.objects.Prayer;
+import us.liveprayer.mobile.tools.API;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
+import android.view.View;
+import android.widget.ListView;
 
 public class PrayerList extends Activity {
+	
+	public API api;
+	
+	private PullToRefreshListView pullToRefreshView;
+	public AsyncTask<Void, Void, Void> getPrayerList;
+	public List<Prayer> prayers = new ArrayList<Prayer>();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		try {
+			api = new API(this, getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		setContentView(R.layout.prayer_list);
+		
+		pullToRefreshView = (PullToRefreshListView) findViewById(R.id.list_list);
+		pullToRefreshView.setOnRefreshListener(new OnRefreshListener<ListView>() {
+			
+			@Override
+			public void onRefresh(PullToRefreshBase<ListView> refreshView) {
+				getPrayerList();
+			}
+		});
 	}
 
 	@Override
@@ -17,6 +53,22 @@ public class PrayerList extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.prayer_list, menu);
 		return true;
+	}
+	
+	public void getPrayerList() {
+		getPrayerList = new GetPrayerList(this, true).execute();
+	}
+	
+	public void updateUi(List<Prayer> prayers) {
+		pullToRefreshView.onRefreshComplete();
+		if (prayers == null) {
+			findViewById(R.id.list_list).setVisibility(View.GONE);
+		} else {
+			findViewById(R.id.list_list).setVisibility(View.VISIBLE);
+		}
+		
+		final PullToRefreshListView list = (PullToRefreshListView) findViewById(R.id.list_list);
+		list.setAdapter(new PrayerListAdapter(this, getApplicationContext(), prayers));
 	}
 
 }

@@ -7,6 +7,21 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".PrayerList" >
+    
+    <LinearLayout
+        
+        android:id="@+id/list_content"
+        style="@style/no_stores_content" >
+
+       	<ImageView
+           	android:id="@+id/list_logo2"
+           	style="@style/list_no_stores" />
+
+        <TextView
+           	android:id="@+id/list_text2"
+           	style="@style/list_text2" />
+
+    </LinearLayout>
 
     <com.handmark.pulltorefresh.library.PullToRefreshListView
     	android:id="@+id/list_list"
