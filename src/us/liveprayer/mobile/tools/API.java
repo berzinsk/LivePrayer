@@ -43,6 +43,19 @@ public class API {
 		return prayers;
 	}
 	
+	public List<Prayer> getPublicPrayerList() {
+		
+		Prayer prayer;
+		List<Prayer> prayers = new ArrayList<Prayer>();
+		String url = "";
+		
+		for (int i = 0; i < 5; i++) {
+			prayer = new Prayer(3254, "Sample test for public prayers");
+			prayers.add(prayer);
+		}
+		return prayers;
+	}
+	
 	private JSONObject getJSONObject(String url) {
 		
 		String json = this.getData(url);

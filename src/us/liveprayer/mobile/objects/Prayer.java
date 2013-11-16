@@ -4,6 +4,7 @@ public class Prayer {
 	
 	long id;
 	String text;
+	int progress;
 	
 	public Prayer() {
 		

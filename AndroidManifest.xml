@@ -12,7 +12,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name="us.liveprayer.mobile.LivePrayer" >
         <activity
             android:name="us.liveprayer.mobile.Authorization"
             android:label="@string/app_name" >
@@ -25,6 +26,10 @@
         <activity
             android:name="us.liveprayer.mobile.PrayerList"
             android:label="@string/title_activity_prayer_list" >
+        </activity>
+        <activity
+            android:name="us.liveprayer.mobile.PrayerView"
+            android:label="@string/title_activity_prayer_view" >
         </activity>
     </application>
 
