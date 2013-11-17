@@ -1,26 +1,24 @@
 package us.liveprayer.mobile.asynctasks;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import us.liveprayer.mobile.PrayerList;
 import us.liveprayer.mobile.objects.Prayer;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class GetPublicPrayerList extends AsyncTask<Void, Void, Void> {
+public class AddPrayerAsync extends AsyncTask<Void, Void, Void> {
 	
 	PrayerList view;
-	List<Prayer> prayers = new ArrayList<Prayer>();
+	Prayer prayer;
 	
-	public GetPublicPrayerList(PrayerList view) {
+	public AddPrayerAsync(PrayerList view) {
 		this.view = view;
 	}
 	
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			view.publicPrayers = view.api.getPrayerList();
+			Log.d("Strada", "strada");
+			view.api.createPrayer();
 		} catch (Exception e) {
 			Log.d("us.liveprayer.mobile", "Error getting public prayer list");
 		}
@@ -29,7 +27,7 @@ public class GetPublicPrayerList extends AsyncTask<Void, Void, Void> {
 	
 	@Override
 	protected void onPostExecute(Void result) {
-		view.updatePublicPrayers(view.publicPrayers);
-		Log.d("Taggg", String.valueOf(view.publicPrayers));
+		view.progressDialog.dismiss();
+		view.updateUi();
 	}
 }

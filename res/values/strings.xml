@@ -6,5 +6,14 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_prayer_list">PrayerList</string>
     <string name="title_activity_prayer_view">PrayerView</string>
+    <string name="title_activity_authorization_screen">Authorization</string>
+    <string name="prayer_title">Title</string>
+    <string name="prayer_content">Content</string>
+    <string name="prayer_participants">Participants</string>
+    <string name="pray">Pray</string>
+    <string name="praying_for">YOU ARE PRAYING FOR</string>
+    <string name="title_activity_add_prayer">AddPrayer</string>
+    <string name="prayer">Prayer</string>
+    <string name="send">Send</string>
 
 </resources>

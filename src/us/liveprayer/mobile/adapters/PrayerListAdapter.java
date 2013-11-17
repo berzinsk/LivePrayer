@@ -50,17 +50,23 @@ public class PrayerListAdapter extends BaseAdapter {
 			tag = new Tag();
 			view = inflater.inflate(R.layout.prayer_row, null);
 			tag.prayer = (TextView) view.findViewById(R.id.row_prayer);
+			
 			view.setTag(tag);
 		} else {
 			tag = (Tag) view.getTag();
 		}
 		
-		tag.prayer.setText(prayers.get(index).getText());
+		tag.prayer.setText("bbbbbb");
+		tag.title.setText("aaaaa");
 		
 		return view;
 	}
 	
 	private static class Tag {
+		public TextView id;
+		TextView sample;
+		TextView title;
 		TextView prayer;
+		TextView time;
 	}
 }

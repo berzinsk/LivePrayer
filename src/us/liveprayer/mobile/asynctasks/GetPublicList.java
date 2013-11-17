@@ -3,28 +3,26 @@ package us.liveprayer.mobile.asynctasks;
 import java.util.ArrayList;
 import java.util.List;
 
-import us.liveprayer.mobile.PrayerList;
+import us.liveprayer.mobile.Authorization;
 import us.liveprayer.mobile.objects.Prayer;
 import android.os.AsyncTask;
+import android.util.Log;
 
-public class GetPrayerList extends AsyncTask<Void, Void, Void> {
+public class GetPublicList extends AsyncTask<Void, Void, Void> {
 	
-	PrayerList view;
-	boolean pullToRefresh = false;
-	String data;
+	Authorization view;
 	List<Prayer> prayers = new ArrayList<Prayer>();
 	
-	public GetPrayerList(PrayerList view, boolean pullToRefresh) {
+	public GetPublicList(Authorization view) {
 		this.view = view;
-		this.pullToRefresh = pullToRefresh;
 	}
 	
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			view.prayers = view.api.getPersonalPrayerList();
+			view.prayers = view.api.getPrayerList();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Log.d("us.liveprayer.mobile", "Error getting public prayer list");
 		}
 		return null;
 	}
@@ -32,5 +30,6 @@ public class GetPrayerList extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 		view.updateUi(view.prayers);
+		view.progressDialog.dismiss();
 	}
 }

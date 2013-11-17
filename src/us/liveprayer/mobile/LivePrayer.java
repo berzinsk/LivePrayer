@@ -8,7 +8,7 @@ public class LivePrayer extends Application {
 	
 	private API api;
 	private Prayer prayer;
-	public static final String url = "";
+	public static final String url = "http://localhost:8732/service/json/";
 	
 	@Override
 	public void onCreate() {

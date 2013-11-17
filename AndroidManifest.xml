@@ -8,15 +8,18 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="14" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name="us.liveprayer.mobile.LivePrayer"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
-        android:name="us.liveprayer.mobile.LivePrayer" >
+        android:theme="@style/AppTheme" >
         <activity
-            android:name="us.liveprayer.mobile.Authorization"
-            android:label="@string/app_name" >
+            android:name="us.liveprayer.mobile.SplashScreen"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,12 +27,24 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="us.liveprayer.mobile.Authorization"
+            android:label="@string/title_activity_authorization_screen"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
             android:name="us.liveprayer.mobile.PrayerList"
-            android:label="@string/title_activity_prayer_list" >
+            android:label="@string/title_activity_prayer_list"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
         <activity
             android:name="us.liveprayer.mobile.PrayerView"
-            android:label="@string/title_activity_prayer_view" >
+            android:label="@string/title_activity_prayer_view"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
+        </activity>
+        <activity
+            android:name="us.liveprayer.mobile.AddPrayer"
+            android:label="@string/title_activity_add_prayer"
+            android:theme="@android:style/Theme.Light.NoTitleBar" >
         </activity>
     </application>
 
