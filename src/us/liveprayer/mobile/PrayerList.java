@@ -92,7 +92,7 @@ public class PrayerList extends Activity {
 	            });
 	        }
 	    };
-	    timer.schedule(doAsynchronousTask, 0, 50000);
+	    timer.schedule(doAsynchronousTask, 0, 20000);
 	}
 	
 	public void updatePublicPrayers(List<Prayer> prayers) {

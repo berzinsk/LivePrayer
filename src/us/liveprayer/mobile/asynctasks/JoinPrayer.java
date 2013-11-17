@@ -17,7 +17,7 @@ public class JoinPrayer extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected Void doInBackground(Void... params) {
 		try {
-			view.api.joinPrayer(String.valueOf(view.prayer.getId()));
+			view.api.joinPrayer(String.valueOf(view.joinId));
 		} catch (Exception e) {
 			Log.d("us.liveprayer.mobile", "Error getting public prayer list");
 		}

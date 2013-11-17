@@ -44,6 +44,7 @@ public class API {
 	public String joinPrayer(String userId) {
 		
 		String url = "http://www.liveprayer.us/LivePrayerService.JsonRestService.Service.svc/JoinPrayer?sessionId=android&prayerId="+userId;
+		Log.d("joinPrayeeer", url);
 		
 		JSONObject data;
 		try {

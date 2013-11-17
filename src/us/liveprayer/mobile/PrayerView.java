@@ -17,6 +17,7 @@ import android.graphics.Bitmap.Config;
 import android.graphics.PorterDuff.Mode;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,11 +28,13 @@ public class PrayerView extends Activity {
 	public Prayer prayer;
 	public AsyncTask<Void, Void, Void> getPrayer;
 	public AsyncTask<Void, Void, Void> joinPrayer;
+	public String joinId;
 	
 	TextView prayer_content;
 	TextView content;
 	TextView title;
 	Bitmap bitmap;
+	public ImageView imageView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,28 @@ public class PrayerView extends Activity {
 		}
 		
 		prayer = ((LivePrayer) this.getApplicationContext()).getPrayer();
-		final ImageView imageView = (ImageView) findViewById(R.id.imageView1);
+		
+		getPrayer = new GetPrayer(this).execute();
+		prayer_content = (TextView) findViewById(R.id.prayer_content);
+		title = (TextView) findViewById(R.id.text_title);
+		imageView = (ImageView) findViewById(R.id.imageView1);
+		
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.prayer_view, menu);
+		return true;
+	}
+	
+	public void updateUi(final Prayer prayer) {
+		prayer_content.setText(prayer.getText());
+		title.setText(prayer.getTitle());
+		joinId = String.valueOf(prayer.getId());
+		
+		joinPrayer = new JoinPrayer(this).execute();
+		
 		AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>() {
 
 			@Override
@@ -68,25 +92,6 @@ public class PrayerView extends Activity {
 		};
 		
 		task.execute();
-		
-		getPrayer = new GetPrayer(this).execute();
-		prayer_content = (TextView) findViewById(R.id.prayer_content);
-		title = (TextView) findViewById(R.id.text_title);
-		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.prayer_view, menu);
-		return true;
-	}
-	
-	public void updateUi(Prayer prayer) {
-		prayer_content.setText(prayer.getText());
-		title.setText(prayer.getTitle());
-		
-		joinPrayer = new JoinPrayer(this).execute();
 		
 	}
 	
